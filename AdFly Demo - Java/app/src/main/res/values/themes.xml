@@ -1,0 +1,10 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.AdflySdk" parent="android:style/Theme.Light.NoTitleBar">
+        <!-- Primary brand color. -->
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="Theme.AdflySdk.NoActionBar">
+    </style>
+</resources>
