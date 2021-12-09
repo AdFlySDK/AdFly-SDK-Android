@@ -7,13 +7,7 @@
 * 引入 adfly aar包
 
 ```groovy
-adfly-sdk-release-0.3.0.aar
-```
-
-* 互动广告需要添加的依赖
-
-```groovy
-adfly-interactivead-release-0.3.0.aar
+adfly-sdk-release-0.3.1.aar
 ```
 
 * 基础依赖三方库
