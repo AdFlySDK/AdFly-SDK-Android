@@ -1,9 +1,9 @@
 package com.adfly.sdk.demo.rewardedvideo;
 
 import android.os.Bundle;
+import com.adfly.sdk.core.AdError;
 import com.adfly.sdk.core.AdflyAd;
 import com.adfly.sdk.demo.R;
-import com.adfly.sdk.rewardedvideo.RewardAdError;
 import com.adfly.sdk.rewardedvideo.RewardedVideoAd;
 import com.adfly.sdk.rewardedvideo.RewardedVideoListener;
 import android.os.Handler;
@@ -72,7 +72,7 @@ public class RewardedVideoActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onRewardedAdLoadFailure(AdflyAd ad, RewardAdError adError) {
+            public void onRewardedAdLoadFailure(AdflyAd ad, AdError adError) {
                 System.out.println("onRewardedAdLoadFailure: " + adError);
                 runOnUiThread(() -> {
                     Toast.makeText(RewardedVideoActivity.this, "onRewardedAdLoadFailure: " + adError, Toast.LENGTH_SHORT).show();
@@ -98,7 +98,7 @@ public class RewardedVideoActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onRewardedAdShowError(AdflyAd ad, RewardAdError adError) {
+            public void onRewardedAdShowError(AdflyAd ad, AdError adError) {
                 System.out.println("onRewardedAdShowError: " + adError);
                 runOnUiThread(() -> {
                     Toast.makeText(RewardedVideoActivity.this, "onRewardedAdShowError: " + adError, Toast.LENGTH_SHORT).show();
