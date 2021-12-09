@@ -101,7 +101,7 @@ rewardedVideoAd.setRewardedVideoListener(new RewardedVideoListener() {
     }
 
     @Override
-    public void onRewardedAdLoadFailure(AdflyAd ad, RewardAdError adError) {
+    public void onRewardedAdLoadFailure(AdflyAd ad, AdError adError) {
         System.out.println("onRewardedAdLoadFailure: " + adError);
         // 建议在这里做重试处理，但重试时间间隔不要太短了
         new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
@@ -118,7 +118,7 @@ rewardedVideoAd.setRewardedVideoListener(new RewardedVideoListener() {
     }
 
     @Override
-    public void onRewardedAdShowError(AdflyAd ad, RewardAdError adError) {
+    public void onRewardedAdShowError(AdflyAd ad, AdError adError) {
         System.out.println("onRewardedAdShowError: " + adError);
     }
 
