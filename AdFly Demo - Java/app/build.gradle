@@ -38,7 +38,7 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
-    implementation files("libs/adfly-sdk-release-0.3.1.aar")
+    implementation files("libs/adfly-sdk-release-0.4.0.aar")
 
     implementation "androidx.browser:browser:1.4.0"
 

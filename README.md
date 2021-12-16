@@ -1,4 +1,4 @@
-# ADFLY SDK 集成文档 V0.3
+# ADFLY SDK 集成文档 V0.4
 
 ## 使用方式
 
@@ -7,7 +7,7 @@
 * 引入 adfly aar包
 
 ```groovy
-adfly-sdk-release-0.3.1.aar
+adfly-sdk-release-0.4.0.aar
 ```
 
 * 基础依赖三方库
