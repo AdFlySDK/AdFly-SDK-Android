@@ -7,7 +7,7 @@
 * 引入 adfly aar包
 
 ```groovy
-adfly-sdk-release-0.4.0.aar
+adfly-sdk-release-0.4.1.aar
 ```
 
 * 基础依赖三方库
