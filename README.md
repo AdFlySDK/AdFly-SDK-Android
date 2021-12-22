@@ -4,28 +4,26 @@
 
 ### 添加依赖库
 
-* 引入 adfly aar包
+1. 在 project 根目录下的 `build.gradle` 文件中添加 mavenCentral() 作为依赖库的源
 
 ```groovy
-adfly-sdk-release-0.4.1.aar
+allprojects {
+    repositories {
+       // ... other repositories
+    
+        mavenCentral()
+    }
+}
 ```
 
-* 基础依赖三方库
+2. 在 app 模块的 `build.gradle` 中添加 adfly 依赖
 
 ```groovy
-implementation "androidx.browser:browser:1.4.0"
-
-implementation 'com.google.android.gms:play-services-ads-identifier:17.1.0'
-
-// rxjava
-implementation 'io.reactivex.rxjava2:rxjava:2.1.14'
-implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
-
-// glid
-implementation 'com.github.bumptech.glide:glide:4.11.0'
-
-// gson
-implementation 'com.google.code.gson:gson:2.8.6'
+dependencies {
+    // ... other project dependencies
+    
+    implementation 'pub.adfly:adfly-sdk:0.4.1'
+}
 ```
 
 ### 配置
