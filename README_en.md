@@ -1,13 +1,13 @@
-# ADFLY SDK 集成文档 V0.4
+# Integrate the ADFLY SDK V0.4
 
-## 其他语言
-* en [English](README_en.md)
+## Language
+* ch [中文](README.md)
 
-## 使用方式
+## Usage
 
-### 添加依赖库
+### Dependency
 
-1. 在 project 根目录下的 `build.gradle` 文件中添加 mavenCentral() 作为依赖库的源
+1. Open your project and update the project’s `build.gradle` to include the following repositories.
 
 ```groovy
 allprojects {
@@ -19,7 +19,7 @@ allprojects {
 }
 ```
 
-2. 在 app 模块的 `build.gradle` 中添加 adfly 依赖
+2. Open your app module's `build.gradle` to include the following dependencies.
 
 ```groovy
 dependencies {
@@ -29,9 +29,9 @@ dependencies {
 }
 ```
 
-### 配置
+### Configuration
 
-**添加 http 支持**
+**Add http support**
 
 * AndroidManifest.xml
 
@@ -39,13 +39,13 @@ dependencies {
 	<application
         android:networkSecurityConfig="@xml/network_security_config"">
 
-        <!-- Adfly 使用了apache http 下载视频 -->
+        <!-- Adfly uses apache http to download the video -->
         <uses-library android:name="org.apache.http.legacy" android:required="false" />
         
     </application>
 ```
 
-* xml/network_security_config.xml 文件
+* xml/network_security_config.xml
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -54,9 +54,9 @@ dependencies {
 </network-security-config>
 ```
 
-## 初始化
+## Initialization
 
-在Application中进行初始化
+Initialize in Application
 
 ```java
 
@@ -78,11 +78,11 @@ public void onCreate() {
     
 ```
 
-## 激励视频
+## RewardedVideo
 
-**注意**
+**Notice**
 
-1. 调用 `RewardedVideoAd.loadAd()` 可以触发一次广告的加载和缓存
+1. Calling `RewardedVideoAd.loadAd()` can trigger the loading and caching of ads once
 
 ```java
 RewardedVideoAd rewardedVideoAd = RewardedVideoAd.getInstance("YOUR_UNIT_ID");
@@ -98,7 +98,7 @@ rewardedVideoAd.setRewardedVideoListener(new RewardedVideoListener() {
     @Override
     public void onRewardedAdLoadFailure(AdflyAd ad, AdError adError) {
         System.out.println("onRewardedAdLoadFailure: " + adError);
-        // 建议在这里做重试处理，但重试时间间隔不要太短了
+        // It is recommended to do retry processing here, but the retry interval should not be too short
         new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -135,9 +135,9 @@ rewardedVideoAd.setRewardedVideoListener(new RewardedVideoListener() {
 rewardedVideoAd.loadAd();
 ```
 
-### 错误码
+### ErrorCode
 
-| code | message | 说明  |
+| code | message | Description  |
 | :--: | :--: |:--: |
 | 5001 | TIMEOUT | Load timeout |
 | 5002 | INVALID AD | |
@@ -150,10 +150,10 @@ rewardedVideoAd.loadAd();
 | 5009 | VIDEO_IS_SHOWING_ERROR | Ad video is already showing. |
 
 
-## 互动广告
+## InteractiveAd
 
-### 修改 Activity Layout
-在页面的 xml 中添加 InteractiveAdView.
+### Update Your Activity Layout
+Configure you `activity_main.xml` to add InteractiveAdView.
 
 ```xml
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -173,36 +173,40 @@ rewardedVideoAd.loadAd();
 </androidx.constraintlayout.widget.ConstraintLayout>
 ```
 
-### 显示广告
+### Show Interactive
 
-1. 调用 `showAd("YOU UNIT ID")` 即可以开始显示。
+Interactive ad allows users play games and get kinds of coupons advertisers offered.
+
+1. To show inertacive ad, you need to call `showAd("YOU UNIT ID")` as belows.
 
 ```
 InteractiveAdView interactive = findViewById(R.id.tnteractive);
 interactive.showAd(widgetId);
 ```
 
-2. 如果想显示自定义大小，可以使用方式： `showAd(width, height, "YOU UNIT ID")`
+2. If you want adjust the size of interacive ad view, you can call `showAd(width, height, "YOU UNIT ID")`.
 
 ```java
 InteractiveAdView interactive = findViewById(R.id.tnteractive);
 interactive.showAd(120, 120, widgetId);
 ```
 
-3. 如果不想显示关闭按钮，可以在调用 `showAd` 方式时设置更多参数。
+3. Sometimes you need hide the close button, you can call showAd with more params.
 
 ```java
 InteractiveAdView interactive = findViewById(R.id.tnteractive);
 
 /**
- * @param width view width
- * @param height view height
- * @param showCloseIcon show close icon
- */
+     * @param width view width
+     * @param height view height
+     * @param showCloseIcon show close icon
+     */
 interactive.showAd(120, 120, false, widgetId);
 ```
 
-### 清除广告
+### Clear Interactive
+
+If you want to clear ad, not closed by users, you can call this method:
 
 ```java
 if (interactive != null) {
