@@ -25,7 +25,7 @@ allprojects {
 dependencies {
     // ... other project dependencies
     
-    implementation 'pub.adfly:adfly-sdk:0.4.1'
+    implementation 'pub.adfly:adfly-sdk:0.4.+'
 }
 ```
 
