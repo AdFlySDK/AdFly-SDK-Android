@@ -213,3 +213,7 @@ if (interactive != null) {
     interactive.setVisibility(View.GONE);
 }
 ```
+
+## Privacy
+
+SDK will collect Language、 MAC、Manufacturer、GAID、AndroidId, and report these to the server, We use these data to identify users. If you release APP to GooglePlay, Should post a privacy policy in both the designated field in the Play Developer Console and from within the Play distributed app itself.

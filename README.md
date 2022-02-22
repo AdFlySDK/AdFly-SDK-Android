@@ -209,3 +209,7 @@ if (interactive != null) {
     interactive.setVisibility(View.GONE);
 }
 ```
+
+## 隐私
+
+SDK 会收集 Language、 MAC、Manufacturer、GAID、AndroidId 这些信息并上报这些数据，用于确定用户ID。如果应用需要上架到 GooglePlay，需要在 GooglePlay 开发者控制台上和隐私政策协议中声明。
