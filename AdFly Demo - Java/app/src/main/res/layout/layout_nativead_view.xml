@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.adfly.sdk.nativead.NativeAdView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/adview"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <RelativeLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground">
+
+        <TextView android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginLeft="13dp"
+            android:layout_marginRight="13dp"
+            android:gravity="left"
+            android:textSize="16sp"
+            android:textColor="#151515"
+            android:maxLines="3"
+            android:ellipsize="end"
+            tools:text="hello world\n12521133"/>
+
+        <FrameLayout android:id="@+id/media_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginLeft="13dp"
+            android:layout_marginRight="13dp"
+            android:layout_below="@id/tv_title">
+            <com.adfly.sdk.nativead.MediaView
+                android:id="@+id/mediaview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:layout_height="200dp"/>
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/media_container"
+            android:layout_marginBottom="3dp" >
+
+            <TextView
+                android:id="@+id/tv_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="13dp"
+                android:orientation="horizontal"
+                android:textSize="12sp"
+                android:textColor="#999999"
+                android:visibility="gone"
+                android:background="@drawable/bg_nativead_tag"
+                tools:visibility="visible"
+                tools:text="Ad"/>
+
+            <TextView
+                android:id="@+id/tv_sponsor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:maxLength="16"
+                android:textSize="13sp"
+                android:textColor="#999999"
+                tools:text="fff"/>
+
+            <TextView
+                android:id="@+id/tv_body"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="13dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:singleLine="true"
+                android:textColor="#5c5c5c"
+                android:textSize="12sp"
+                tools:text="fffffffffffffffffffff" />
+
+            <Button
+                android:id="@+id/btn_action"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="22dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="13dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/btn_advert_link"
+                android:minWidth="60dp"
+                android:minHeight="0dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textAllCaps="false"
+                android:textColor="#2691e1"
+                android:textSize="12sp"
+                android:visibility="gone"
+                tools:text="Download"
+                tools:visibility="visible"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</com.adfly.sdk.nativead.NativeAdView>

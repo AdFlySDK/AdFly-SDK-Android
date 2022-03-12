@@ -6,6 +6,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import com.adfly.sdk.demo.interactivead.InteractiveAdActivity;
+import com.adfly.sdk.demo.nativead.NativeAdActivity;
 import com.adfly.sdk.demo.rewardedvideo.RewardedVideoActivity;
 
 /**
@@ -27,6 +28,9 @@ public class MainActivity extends AppCompatActivity {
         });
         findViewById(R.id.interactive_ad).setOnClickListener(v -> {
             startActivity(new Intent(v.getContext(), InteractiveAdActivity.class));
+        });
+        findViewById(R.id.native_ad).setOnClickListener(v -> {
+            startActivity(new Intent(v.getContext(), NativeAdActivity.class));
         });
     }
 

@@ -55,6 +55,23 @@
             android:textColor="#333333"
             android:text="InteractiveAd" />
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#e1e1e1"/>
+
+        <TextView
+            android:id="@+id/native_ad"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:gravity="center_vertical"
+            android:drawableRight="@mipmap/ic_arrow"
+            android:textSize="18sp"
+            android:textColor="#333333"
+            android:text="NativeAd" />
+
     </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,4 +1,4 @@
-# ADFLY SDK 集成文档 V0.4
+# ADFLY SDK 集成文档 V0.10
 
 ## 其他语言
 * en [English](README_en.md)
@@ -25,33 +25,8 @@ allprojects {
 dependencies {
     // ... other project dependencies
     
-    implementation 'pub.adfly:adfly-sdk:0.4.+'
+    implementation 'pub.adfly:adfly-sdk:0.10.+'
 }
-```
-
-### 配置
-
-**添加 http 支持**
-
-* AndroidManifest.xml
-
-```xml
-	<application
-        android:networkSecurityConfig="@xml/network_security_config"">
-
-        <!-- Adfly 使用了apache http 下载视频 -->
-        <uses-library android:name="org.apache.http.legacy" android:required="false" />
-        
-    </application>
-```
-
-* xml/network_security_config.xml 文件
-
-```xml
-<?xml version="1.0" encoding="utf-8"?>
-<network-security-config>
-    <base-config cleartextTrafficPermitted="true" />
-</network-security-config>
 ```
 
 ## 初始化
@@ -210,6 +185,129 @@ if (interactive != null) {
 }
 ```
 
+## 原生广告
+### 加载广告
+1. 在 ADFly 控制后台中创建原生广告 UnitId
+2. 创建 NativeAd 对象
+3. 调用 NativeAd.loadAd() 请求加载广告
+
+```java
+NativeAd nativeAd = new NativeAd("YOUR_UNIT_ID");
+nativeAd.setAdListener(new NativeAdListener() {
+    @Override
+    public void onMediaDownloaded(AdflyAd ad) {
+        System.out.println("onMediaDownloaded");
+    }
+
+    @Override
+    public void onError(AdflyAd ad, AdError error) {
+        System.out.println("onError: " + error);
+    }
+
+    @Override
+    public void onAdLoaded(AdflyAd ad) {
+        System.out.println("onAdLoaded");
+    }
+
+    @Override
+    public void onAdLoadFailure(AdflyAd ad, AdError adError) {
+        System.out.println("onAdLoadFailure: " + adError);
+    }
+
+    @Override
+    public void onAdClicked(AdflyAd ad) {
+        System.out.println("onAdClicked");
+    }
+
+    @Override
+    public void onAdImpression(AdflyAd ad) {
+        System.out.println("onAdImpression");
+    }
+});
+nativeAd.loadAd();
+```
+
+### 显示原生广告
+
+在收到 `onAdLoaded` 回调后可以开始显示广告
+
+1. 创建一个 xml 布局，使用 `NativeAdView` 作为 rootView
+
+**NativeAdView**：用于广告曝光统计
+
+**MediaView**： 用于显示广告的图片、视频等
+
+```xml
+<com.adfly.sdk.nativead.NativeAdView>
+
+    <TextView android:id="@+id/tv_title">
+    
+    <com.adfly.sdk.nativead.MediaView android:id="@+id/mediaview"/>
+    
+    <TextView android:id="@+id/tv_tag"/>
+
+    <TextView  android:id="@+id/tv_sponsor"/>
+
+    <TextView android:id="@+id/tv_body" />
+
+    <Button android:id="@+id/btn_action"/>
+
+</com.adfly.sdk.nativead.NativeAdView>
+```
+
+2. 从 `NativeAd` 中可以获取广告的 **标题**、**描述**、**赞助商**、**Ad标签**、**按钮**
+3. 调用 `NativeAd.showView(NativeAdView adView, MediaView mediaView, List<View> clickableViews)` 来显示广告
+
+**clickableViews**：用户可以用于点击的 View 列表
+
+```java
+View layout = getLayoutInflater().inflate(R.layout.layout_nativead_view, adContainer, false);
+adContainer.addView(layout, new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+
+NativeAdView adView = layout.findViewById(R.id.adview);
+
+TextView tvTitle = adView.findViewById(R.id.tv_title);
+TextView tvBody = adView.findViewById(R.id.tv_body);
+TextView tvSponsor = adView.findViewById(R.id.tv_sponsor);
+TextView tvTag = adView.findViewById(R.id.tv_tag);
+Button btnAction = adView.findViewById(R.id.btn_action);
+MediaView mediaView = adView.findViewById(R.id.mediaview);
+
+tvTitle.setText(nativeAd.getTitle());
+tvBody.setText(nativeAd.getBody());
+tvSponsor.setText(nativeAd.getSponsor());
+if (!TextUtils.isEmpty(nativeAd.getTag())) {
+    tvTag.setText(nativeAd.getTag());
+    tvTag.setVisibility(View.VISIBLE);
+} else {
+    tvTag.setVisibility(View.GONE);
+}
+
+if (!TextUtils.isEmpty(nativeAd.getCallToAction())) {
+    btnAction.setText(nativeAd.getCallToAction());
+    btnAction.setVisibility(View.VISIBLE);
+} else {
+    btnAction.setVisibility(View.GONE);
+}
+
+List<View> clickableViews = new ArrayList<>();
+clickableViews.add(layout);
+clickableViews.add(mediaView);
+clickableViews.add(btnAction);
+nativeAd.showView(adView, mediaView, clickableViews);
+```
+![](native_layout.png)
+
+**View #1: 标题**
+
+**View #2: MediaView**
+
+**View #3: Ad标签**
+
+**View #4: 赞助商**
+
+**View #5: 按钮**
+
 ## 隐私
 
-SDK 会收集 Language、 MAC、Manufacturer、GAID、AndroidId 这些信息并上报这些数据，用于确定用户ID。如果应用需要上架到 GooglePlay，需要在 GooglePlay 开发者控制台上和隐私政策协议中声明。
+SDK 会收集 Language、 Manufacturer、GAID 这些信息并上报这些数据，用于确定用户ID。如果应用需要上架到 GooglePlay，需要在 GooglePlay 开发者控制台上和隐私政策协议中声明。

@@ -25,33 +25,8 @@ allprojects {
 dependencies {
     // ... other project dependencies
     
-    implementation 'pub.adfly:adfly-sdk:0.4.+'
+    implementation 'pub.adfly:adfly-sdk:0.10.+'
 }
-```
-
-### Configuration
-
-**Add http support**
-
-* AndroidManifest.xml
-
-```xml
-	<application
-        android:networkSecurityConfig="@xml/network_security_config"">
-
-        <!-- Adfly uses apache http to download the video -->
-        <uses-library android:name="org.apache.http.legacy" android:required="false" />
-        
-    </application>
-```
-
-* xml/network_security_config.xml
-
-```xml
-<?xml version="1.0" encoding="utf-8"?>
-<network-security-config>
-    <base-config cleartextTrafficPermitted="true" />
-</network-security-config>
 ```
 
 ## Initialization
@@ -213,6 +188,128 @@ if (interactive != null) {
     interactive.setVisibility(View.GONE);
 }
 ```
+## Native Ads
+### Load Ad
+1. Create a native ad UnitId in the ADFly dashboard
+2. Create a NativeAd object
+3. Call NativeAd.loadAd() to request to load an ad
+
+```java
+NativeAd nativeAd = new NativeAd("YOUR_UNIT_ID");
+nativeAd.setAdListener(new NativeAdListener() {
+    @Override
+    public void onMediaDownloaded(AdflyAd ad) {
+        System.out.println("onMediaDownloaded");
+    }
+
+    @Override
+    public void onError(AdflyAd ad, AdError error) {
+        System.out.println("onError: " + error);
+    }
+
+    @Override
+    public void onAdLoaded(AdflyAd ad) {
+        System.out.println("onAdLoaded");
+    }
+
+    @Override
+    public void onAdLoadFailure(AdflyAd ad, AdError adError) {
+        System.out.println("onAdLoadFailure: " + adError);
+    }
+
+    @Override
+    public void onAdClicked(AdflyAd ad) {
+        System.out.println("onAdClicked");
+    }
+
+    @Override
+    public void onAdImpression(AdflyAd ad) {
+        System.out.println("onAdImpression");
+    }
+});
+nativeAd.loadAd();
+```
+
+### Show Ad
+
+Ads can be displayed after receiving the `onAdLoaded` callback
+
+1. Create an xml layout using `NativeAdView` as rootView
+
+**NativeAdView**：Used for ad impression
+
+**MediaView**： Images, videos, etc. used to display ads
+
+```xml
+<com.adfly.sdk.nativead.NativeAdView>
+
+    <TextView android:id="@+id/tv_title">
+    
+    <com.adfly.sdk.nativead.MediaView android:id="@+id/mediaview"/>
+    
+    <TextView android:id="@+id/tv_tag"/>
+
+    <TextView  android:id="@+id/tv_sponsor"/>
+
+    <TextView android:id="@+id/tv_body" />
+
+    <Button android:id="@+id/btn_action"/>
+
+</com.adfly.sdk.nativead.NativeAdView>
+```
+
+2. From `NativeAd`, you can get the **title**, **body**, **sponsor**, **Ad tag**, **Call to Action button** of the ad.
+3. Call `NativeAd.showView(NativeAdView adView, MediaView mediaView, List<View> clickableViews)` to show the ad.
+
+**clickableViews**：A list of Views that the user can use for clicks
+
+```java
+View layout = getLayoutInflater().inflate(R.layout.layout_nativead_view, adContainer, false);
+adContainer.addView(layout, new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+
+NativeAdView adView = layout.findViewById(R.id.adview);
+
+TextView tvTitle = adView.findViewById(R.id.tv_title);
+TextView tvBody = adView.findViewById(R.id.tv_body);
+TextView tvSponsor = adView.findViewById(R.id.tv_sponsor);
+TextView tvTag = adView.findViewById(R.id.tv_tag);
+Button btnAction = adView.findViewById(R.id.btn_action);
+MediaView mediaView = adView.findViewById(R.id.mediaview);
+
+tvTitle.setText(nativeAd.getTitle());
+tvBody.setText(nativeAd.getBody());
+tvSponsor.setText(nativeAd.getSponsor());
+if (!TextUtils.isEmpty(nativeAd.getTag())) {
+    tvTag.setText(nativeAd.getTag());
+    tvTag.setVisibility(View.VISIBLE);
+} else {
+    tvTag.setVisibility(View.GONE);
+}
+
+if (!TextUtils.isEmpty(nativeAd.getCallToAction())) {
+    btnAction.setText(nativeAd.getCallToAction());
+    btnAction.setVisibility(View.VISIBLE);
+} else {
+    btnAction.setVisibility(View.GONE);
+}
+
+List<View> clickableViews = new ArrayList<>();
+clickableViews.add(layout);
+clickableViews.add(mediaView);
+clickableViews.add(btnAction);
+nativeAd.showView(adView, mediaView, clickableViews);
+```
+![](native_layout.png)
+
+**View #1: title**
+
+**View #2: MediaView**
+
+**View #3: Ad tag**
+
+**View #4: sponsor**
+
+**View #5: Call to Action button**
 
 ## Privacy
 
