@@ -139,7 +139,7 @@ rewardedVideoAd.loadAd();
     <RelativeLayout android:id="@+id/linearlayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <com.xb.interactivelibrary.InteractiveAdView
+        <com.adfly.sdk.interactive.InteractiveAdView
             android:id="@+id/tnteractive"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
