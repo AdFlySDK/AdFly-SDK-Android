@@ -1,7 +1,9 @@
 # Integrate the ADFLY SDK V0.10
 
-## Language
-* ch [中文](README.md)
+---
+
+## Other Language
+* [中文](README.md)
 
 ## Usage
 
@@ -31,7 +33,7 @@ dependencies {
 
 ## Initialization
 
-Initialize in Application
+Initialize sdk at application startup
 
 ```java
 
@@ -313,4 +315,4 @@ nativeAd.showView(adView, mediaView, clickableViews);
 
 ## Privacy
 
-SDK will collect Language、 MAC、Manufacturer、GAID、AndroidId, and report these to the server, We use these data to identify users. If you release APP to GooglePlay, Should post a privacy policy in both the designated field in the Play Developer Console and from within the Play distributed app itself.
+SDK will collect client setting like Language、 Manufacturer、GAID, and report these to the server, We use these data to identify users. If you release APP to GooglePlay, Should post a privacy policy in both the designated field in the Play Developer Console and from within the Play distributed app itself.
