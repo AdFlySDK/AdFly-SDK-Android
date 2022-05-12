@@ -1,4 +1,4 @@
-# Integrate the ADFLY SDK V0.10
+# Integrate the ADFLY SDK V0.12
 
 ---
 
@@ -27,7 +27,7 @@ allprojects {
 dependencies {
     // ... other project dependencies
     
-    implementation 'pub.adfly:adfly-sdk:0.10.+'
+    implementation 'pub.adfly:adfly-sdk:0.12.+'
 }
 ```
 
