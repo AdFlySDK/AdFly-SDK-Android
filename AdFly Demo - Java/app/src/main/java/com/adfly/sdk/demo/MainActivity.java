@@ -8,6 +8,7 @@ import androidx.appcompat.widget.Toolbar;
 import com.adfly.sdk.demo.interactivead.InteractiveAdActivity;
 import com.adfly.sdk.demo.nativead.NativeAdActivity;
 import com.adfly.sdk.demo.rewardedvideo.RewardedVideoActivity;
+import com.adfly.sdk.demo.splash.SplashAdActivity;
 
 /**
  * Created by yejinbing on 2021/12/7.
@@ -31,6 +32,9 @@ public class MainActivity extends AppCompatActivity {
         });
         findViewById(R.id.native_ad).setOnClickListener(v -> {
             startActivity(new Intent(v.getContext(), NativeAdActivity.class));
+        });
+        findViewById(R.id.splash_ad).setOnClickListener(v -> {
+            startActivity(new Intent(v.getContext(), SplashAdActivity.class));
         });
     }
 

@@ -36,6 +36,11 @@
             android:label="NativeAd"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
         </activity>
+        <activity
+            android:name=".splash.SplashAdActivity"
+            android:label="SplashAd"
+            android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen" >
+        </activity>
     </application>
 
 </manifest>
