@@ -1,4 +1,4 @@
-# ADFLY SDK 集成文档 V0.12
+# ADFLY SDK 集成文档 V0.14
 
 ---
 
@@ -27,7 +27,7 @@ allprojects {
 dependencies {
     // ... other project dependencies
     
-    implementation 'pub.adfly:adfly-sdk:0.12.+'
+    implementation 'pub.adfly:adfly-sdk:0.14.+'
 }
 ```
 
