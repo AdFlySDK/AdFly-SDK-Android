@@ -1,4 +1,4 @@
-# ADFLY SDK 集成文档 V0.14
+# ADFLY SDK 集成文档 V0.20
 
 ---
 
@@ -27,7 +27,7 @@ allprojects {
 dependencies {
     // ... other project dependencies
     
-    implementation 'pub.adfly:adfly-sdk:0.14.+'
+    implementation 'pub.adfly:adfly-sdk:0.20.+'
 }
 ```
 
@@ -309,6 +309,78 @@ nativeAd.showView(adView, mediaView, clickableViews);
 **View #4: 赞助商**
 
 **View #5: 按钮**
+
+## Banners
+
+1. 在 ADFly 控制后台中创建Banner类型广告 UnitId
+2. 创建 AdView 对象
+3. 将 AdView 添加到父控件中
+4. 调用 AdView.loadAd() 请求加载广告
+
+```
+AdView adView = new AdView(this, "YOUR_UNIT_ID", AdType.BANNER);
+
+container.addView(mAdView, new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+
+adView.setAdListener(new AdListener() {
+    @Override
+    public void onError(AdflyAd ad, AdError error) {
+    }
+
+    @Override
+    public void onAdLoaded(AdflyAd ad) {
+    }
+
+    @Override
+    public void onAdLoadFailure(AdflyAd ad, AdError adError) {
+    }
+
+    @Override
+    public void onAdClicked(AdflyAd ad) {
+    }
+
+    @Override
+    public void onAdImpression(AdflyAd ad) {
+    }
+});
+adView.loadAd()
+```
+
+## MRECs
+
+1. 在 ADFly 控制后台中创建MREC类型广告 UnitId
+2. 创建 AdView 对象
+3. 将 AdView 添加到父控件中
+4. 调用 AdView.loadAd() 请求加载广告
+
+```
+AdView adView = new AdView(this, "YOUR_UNIT_ID", AdType.MREC);
+
+container.addView(mAdView, new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+
+adView.setAdListener(new AdListener() {
+    @Override
+    public void onError(AdflyAd ad, AdError error) {
+    }
+
+    @Override
+    public void onAdLoaded(AdflyAd ad) {
+    }
+
+    @Override
+    public void onAdLoadFailure(AdflyAd ad, AdError adError) {
+    }
+
+    @Override
+    public void onAdClicked(AdflyAd ad) {
+    }
+
+    @Override
+    public void onAdImpression(AdflyAd ad) {
+    }
+});
+adView.loadAd()
+```
 
 ## 隐私
 

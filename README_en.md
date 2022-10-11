@@ -1,4 +1,4 @@
-# Integrate the ADFLY SDK V0.14
+# Integrate the ADFLY SDK V0.20
 
 ---
 
@@ -27,7 +27,7 @@ allprojects {
 dependencies {
     // ... other project dependencies
     
-    implementation 'pub.adfly:adfly-sdk:0.14.+'
+    implementation 'pub.adfly:adfly-sdk:0.20.+'
 }
 ```
 
@@ -312,6 +312,79 @@ nativeAd.showView(adView, mediaView, clickableViews);
 **View #4: sponsor**
 
 **View #5: Call to Action button**
+
+## Banners
+
+1. Create a Banner ad UnitId in the ADFly dashboard
+2. Create a AdView object
+3. show AdView to parent widget
+4. Call AdView loadAd() to request to load an ad
+
+
+```
+AdView adView = new AdView(this, "YOUR_UNIT_ID", AdType.BANNER);
+
+container.addView(mAdView, new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+
+adView.setAdListener(new AdListener() {
+    @Override
+    public void onError(AdflyAd ad, AdError error) {
+    }
+
+    @Override
+    public void onAdLoaded(AdflyAd ad) {
+    }
+
+    @Override
+    public void onAdLoadFailure(AdflyAd ad, AdError adError) {
+    }
+
+    @Override
+    public void onAdClicked(AdflyAd ad) {
+    }
+
+    @Override
+    public void onAdImpression(AdflyAd ad) {
+    }
+});
+adView.loadAd()
+```
+
+## MRECs
+
+1. Create a MREC ad UnitId in the ADFly dashboard
+2. Create a AdView object
+3. show AdView to parent widget
+4. Call AdView loadAd() to request to load an ad
+
+```
+AdView adView = new AdView(this, "YOUR_UNIT_ID", AdType.MREC);
+
+container.addView(mAdView, new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+
+adView.setAdListener(new AdListener() {
+    @Override
+    public void onError(AdflyAd ad, AdError error) {
+    }
+
+    @Override
+    public void onAdLoaded(AdflyAd ad) {
+    }
+
+    @Override
+    public void onAdLoadFailure(AdflyAd ad, AdError adError) {
+    }
+
+    @Override
+    public void onAdClicked(AdflyAd ad) {
+    }
+
+    @Override
+    public void onAdImpression(AdflyAd ad) {
+    }
+});
+adView.loadAd()
+```
 
 ## Privacy
 
