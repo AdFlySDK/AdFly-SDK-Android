@@ -126,6 +126,55 @@ rewardedVideoAd.loadAd();
 | 5008 | VIDEO_DOWNLOAD_ERROR | Error downloading video. |
 | 5009 | VIDEO_IS_SHOWING_ERROR | Ad video is already showing. |
 
+## InterstitialAd
+
+**Notice**
+
+1. Calling `InterstitialAd.loadAd()` can trigger the loading and caching of ads once
+
+```java
+InterstitialAd interstitialAd = InterstitialAd.getInstance("YOUR_UNIT_ID");
+interstitialAd.setAdListener(new InterstitialAdListener() {
+    @Override
+    public void onAdLoadSuccess(AdflyAd ad) {
+        if (interstitialAd.isReady()) {
+            interstitialAd.show();
+        }
+    }
+
+    @Override
+    public void onAdLoadFailure(AdflyAd ad, AdError adError) {
+        // It is recommended to do retry processing here, but the retry interval should not be too short
+        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+            }
+        }, 60 * 1000);
+    }
+
+    @Override
+    public void onAdShowed(AdflyAd ad) {
+
+    }
+
+    @Override
+    public void onAdShowError(AdflyAd ad, AdError adError) {
+
+    }
+
+    @Override
+    public void onAdClosed(AdflyAd ad) {
+
+    }
+
+    @Override
+    public void onAdClick(AdflyAd ad) {
+
+    }
+});
+interstitialAd.loadAd();
+```
 
 ## InteractiveAd
 

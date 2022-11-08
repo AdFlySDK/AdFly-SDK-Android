@@ -126,6 +126,55 @@ rewardedVideoAd.loadAd();
 | 5008 | VIDEO_DOWNLOAD_ERROR | Error downloading video. |
 | 5009 | VIDEO_IS_SHOWING_ERROR | Ad video is already showing. |
 
+## 插屏广告
+
+**注意**
+
+1. 调用 `InterstitialAd.loadAd()` 可以触发一次广告的加载和缓存
+
+```java
+InterstitialAd interstitialAd = InterstitialAd.getInstance("YOUR_UNIT_ID");
+interstitialAd.setAdListener(new InterstitialAdListener() {
+    @Override
+    public void onAdLoadSuccess(AdflyAd ad) {
+        if (interstitialAd.isReady()) {
+            interstitialAd.show();
+        }
+    }
+
+    @Override
+    public void onAdLoadFailure(AdflyAd ad, AdError adError) {
+        // 建议在这里做重试处理，但重试时间间隔不要太短了
+        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+            }
+        }, 60 * 1000);
+    }
+
+    @Override
+    public void onAdShowed(AdflyAd ad) {
+
+    }
+
+    @Override
+    public void onAdShowError(AdflyAd ad, AdError adError) {
+
+    }
+
+    @Override
+    public void onAdClosed(AdflyAd ad) {
+
+    }
+
+    @Override
+    public void onAdClick(AdflyAd ad) {
+
+    }
+});
+interstitialAd.loadAd();
+```
 
 ## 互动广告
 
