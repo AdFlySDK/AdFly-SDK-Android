@@ -435,6 +435,37 @@ adView.setAdListener(new AdListener() {
 adView.loadAd()
 ```
 
+## LandingPage
+
+### loadAd
+
+Create a LandingPageAd object
+
+```
+LandingPageAd landingPageAd = new LandingPageAd("YOUR_UNIT_ID");
+landingPageAd.setAdListener(new LandingPageAdListener() {
+    @Override
+    public void onAdLoadSuccess(AdflyAd ad) {
+        System.out.println("onAdLoadSuccess");
+    }
+
+    @Override
+    public void onAdLoadFailure(AdflyAd ad, AdError adError) {
+        System.out.println("onAdLoadFailure: " + adError);
+    }
+});
+```
+
+### showAd
+Call LandingPage show() to show an ad when load successed.
+
+```
+if (landingPageAd.isReady()) {
+    landingPageAd.show();
+}
+```
+
+
 ## Privacy
 
 SDK will collect client setting like Language、 Manufacturer、GAID, and report these to the server, We use these data to identify users. If you release APP to GooglePlay, Should post a privacy policy in both the designated field in the Play Developer Console and from within the Play distributed app itself.

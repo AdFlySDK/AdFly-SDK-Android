@@ -431,6 +431,36 @@ adView.setAdListener(new AdListener() {
 adView.loadAd()
 ```
 
+## LandingPage
+
+### 加载广告
+创建加载LandingPage广告，传入 UnitId
+
+```
+LandingPageAd landingPageAd = new LandingPageAd("YOUR_UNIT_ID");
+landingPageAd.setAdListener(new LandingPageAdListener() {
+    @Override
+    public void onAdLoadSuccess(AdflyAd ad) {
+        System.out.println("onAdLoadSuccess");
+    }
+
+    @Override
+    public void onAdLoadFailure(AdflyAd ad, AdError adError) {
+        System.out.println("onAdLoadFailure: " + adError);
+    }
+});
+```
+
+### 显示广告
+收到加载成功回调后即可开始显示，在显示前判断广告是否准备好
+显示后，会自动重新请求新的广告
+
+```
+if (landingPageAd.isReady()) {
+    landingPageAd.show();
+}
+```
+
 ## 隐私
 
 SDK 会收集 Language、 Manufacturer、GAID 这些信息并上报这些数据，用于确定用户ID。如果应用需要上架到 GooglePlay，需要在 GooglePlay 开发者控制台上和隐私政策协议中声明。
